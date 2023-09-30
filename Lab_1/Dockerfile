@@ -5,6 +5,5 @@ RUN apt-get update -y && apt-get upgrade -y
 
 RUN apt-get install python3 -y
 
-COPY ./server.py /usr/src/test/
+COPY
 
-WORKDIR /usr/src/test/
