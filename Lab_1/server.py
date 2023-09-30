@@ -13,30 +13,27 @@
 ####################################
 
 import socket
-import sys
+
+# import sys
+
+PORT = 8080  # use port 8080
+HOST = "0.0.0.0"  # listen for all address's
 
 
-def Main():
-
-    PORT = 8080       # use port 8080
-    HOST = '0.0.0.0'  # listen for all address's
-
+def main():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((HOST, PORT))
     server_socket.listen(1)
-
+    client_socket, client_address = server_socket.accept()
     print(f"Server listening on http://{HOST}:{PORT}")
 
     while True:
-
         print("Waiting...")
-
-        client_socket, client_address = server_socket.accept()
 
         try:
             print(f"Request received from {client_address}")
 
-            file_request = client_socket.recv(1024).decode('utf-8')
+            file_request = client_socket.recv(1024).decode("utf-8")
 
             file_name = file_request.split()[1]
 
@@ -46,7 +43,7 @@ def Main():
 
             header_response = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n"
 
-            client_socket.sendall(header_response.encode('utf-8'))
+            client_socket.sendall(header_response.encode("utf-8"))
 
             for i in range(0, len(output_data)):
                 client_socket.send(output_data[i].encode())
@@ -61,21 +58,10 @@ def Main():
         finally:
             client_socket.close()
 
-    server_socket.close()
-    sys.exit()
+    # unreachable?
+    # server_socket.close()
+    # sys.exit()
 
 
-if __name__ == '__main__':
-    Main()
-
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+if __name__ == "__main__":
+    main()
