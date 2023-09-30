@@ -18,7 +18,7 @@ import sys
 
 def Main():
 
-    PORT = 8080.      # use port 8080
+    PORT = 8080       # use port 8080
     HOST = '0.0.0.0'  # listen for all address's
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,7 +34,7 @@ def Main():
         client_socket, client_address = server_socket.accept()
 
         try:
-            print(f"Request recieved from {client_address}")
+            print(f"Request received from {client_address}")
 
             file_request = client_socket.recv(1024).decode('utf-8')
 
